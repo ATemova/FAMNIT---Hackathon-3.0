@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Chat Bot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+      position: relative;
+    }
+
+    header {
+      background-color: #343a40;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .bot-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer; /* Changes the cursor to a hand when hovering over the icon */
+    }
+
+    .bot-icon img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="greeting"></h1>
+  </header>
+  <div class="bot-icon" onclick="openPopup()"> <!-- Added an onclick event -->
+    <img src="bot.png" alt="Bot">
+  </div>
+
+  <script>
+    // Get the current day of the week
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var date = new Date();
+    var dayName = days[date.getDay()];
+
+    // Set the greeting text
+    var greetingText = "Hello, it's your " + dayName + " bot!";
+    document.getElementById('greeting').innerText = greetingText;
+
+    // Open a smaller pop-up window when the bot icon is clicked
+    function openPopup() {
+      window.open('popup.html', 'Popup', 'width=500,height=500'); // Adjust the width and height as needed
+    }
+  </script>
+</body>
+</html>
