@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>News</h1>
+
+    <form>
+      <input
+        type="text"
+        id="search"
+        placeholder="topic..."
+      />
+      <button type="submit">Get News</button>
+    </form>
+
+    <div id="news-container"></div>
+    <script>
+      const searchInput = document.getElementById("search")
+      const newsForm = document.querySelector("form")
+      const newsContainer = document.getElementById("news-container")
+
+      newsForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const news = fetch(
+            `https://newsapi.org/v2/everything?${
+            searchInput.value ? `q=${searchInput.value}&` : ""
+          }apiKey=0b329083fd2e48f3b08172a5b373a728`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            newsContainer.innerText = ""
+            data.articles.map((article) => {
+              const articleElement = document.createElement("div")
+              articleElement.innerHTML = `
+                        <h2>${article.title}</h2>
+                        <p>${article.description}</p>
+                        <a href="${article.url}" target="_blank" >Read more</a>
+                    `
+              newsContainer.appendChild(articleElement)
+
+            })
+          })
+      })
+    </script>
+  </body>
+</html>
