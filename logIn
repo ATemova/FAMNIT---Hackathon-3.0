@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: rgb(34, 142, 220);
+    }
+
+    form {
+      width: 80%;
+      max-width: 500px; 
+      margin: auto;
+      padding: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px; 
+    }
+
+    input, select {
+      width: 100%; 
+      box-sizing: border-box;
+      padding: 8px;
+      margin-bottom: 10px; 
+    }
+
+    button {
+      width: 50%;
+      height: 40px;
+      background-color: gray;
+      color: white;
+      border: none; 
+      cursor: pointer;
+    }
+
+    /* Center the button */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form id="IdForm" onsubmit="event.preventDefault(); saveData();">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+    </div>
+    <!-- Add 'button-container' class to the div -->
+    <div class="button-container">
+      <button onclick="navigateToPage()">Log In</button>
+    </div>
+  </form>
+
+  <script>
+    function navigateToPage() {
+      const user = document.getElementById('username');
+      const em = document.getElementById('email');
+      const pass = document.getElementById('password');
+
+      user.style.backgroundColor = "";
+      em.style.backgroundColor = "";
+      pass.style.backgroundColor = "";
+
+      if (user.value === "" || em.value === "" || pass.value === "") {
+        if (user.value === "") user.style.backgroundColor = "lightcoral";
+        if (em.value === "") em.style.backgroundColor = "lightcoral";
+        if (pass.value === "") pass.style.backgroundColor = "lightcoral";
+
+        alert("Please fill all the fields.");
+      } else {
+        window.location.href = "../testt.html";
+      }
+    }
+
+    function saveData() {
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      localStorage.setItem('username', username);
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    }
+  </script>
+</body>
+</html>
