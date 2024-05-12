@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+    body {
+      background: rgb(12,29,116);
+        background: radial-gradient(circle, rgba(12,29,116,1) 0%, rgba(0,5,14,1) 100%);
+        height: 100vh;
+        margin: 0;
+        font-family: Ubuntu Sans, sans-serif;
+    }
+
+    form {
+      margin: 20%;
+        width: 50%;
+        box-sizing: border-box;
+        font-size: 16px;
+        padding: 12px 20px 12px 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px; 
+      padding-top: 7px;
+      
+      color: white;
+    }
+
+    input, select {
+      width: 100%; 
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 15px;
+      padding: 12px;
+      margin-bottom: 30px; 
+    }
+
+    button {
+      appearance: button;
+        background-color: #1652F0;
+        border: 1px solid #1652F0;
+        border-radius: 15px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        font-family: Ubuntu Sans, sans-serif;
+        font-size: 16px;
+        line-height: 1.15;
+        overflow: visible;
+        padding: 13px 16px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: all 80ms ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: fit-content;
+    }
+
+    /* Center the button */
+    .button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <form id="IdForm" onsubmit="event.preventDefault(); saveData();">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+    </div>
+    <!-- Add 'button-container' class to the div -->
+    <div class="button-container">
+      <button onclick="navigateToPage()">Log In</button>
+    </div>
+  </form>
+
+  <script>
+    function navigateToPage() {
+      const user = document.getElementById('username');
+      const em = document.getElementById('email');
+      const pass = document.getElementById('password');
+
+      user.style.backgroundColor = "";
+      em.style.backgroundColor = "";
+      pass.style.backgroundColor = "";
+
+      if (user.value === "" || em.value === "" || pass.value === "") {
+        if (user.value === "") user.style.backgroundColor = "lightcoral";
+        if (em.value === "") em.style.backgroundColor = "lightcoral";
+        if (pass.value === "") pass.style.backgroundColor = "lightcoral";
+
+        alert("Please fill all the fields.");
+      } else {
+        window.location.href = "../testt.html";
+      }
+    }
+
+    function saveData() {
+      const username = document.getElementById('username').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      localStorage.setItem('username', username);
+      localStorage.setItem('email', email);
+      localStorage.setItem('password', password);
+    }
+  </script>
+</body>
+</html>
