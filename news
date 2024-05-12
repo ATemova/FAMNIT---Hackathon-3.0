@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>News</h1>
+
+    <form>
+      <input
+        type="text"
+        id="search"
+        placeholder="topic..."
+      />
+      <button type="submit">Get News</button>
+    </form>
+
+    <label>Vocie: </label>
+    <input type="text" id="vocie"></input>
+
+
+
+    <div id="news-container"></div>
+
+
+
+    <script>
+      const searchInput = document.getElementById("search")
+      const newsForm = document.querySelector("form")
+      const newsContainer = document.getElementById("news-container")
+
+if ('speechSynthesis' in window) {
+ // Speech Synthesis supported 🎉
+}else{
+  // Speech Synthesis Not Supported 😣
+  alert("Sorry, your browser doesn't support text to speech!");
+}    
+   
+speechSynthesis.getVoices().forEach(function(voice) {
+  console.log(voice.name, voice.default ? voice.default :'');
+});
+
+const speak = (text) => {
+        const msg = new SpeechSynthesisUtterance()
+        var voices = window.speechSynthesis.getVoices();
+        let vocieNum = document.getElementById("vocie");
+        /*switch(voiceNum.value){
+          case "":
+          msg.voice = voices[0]; 
+          break;
+          case "1":
+          msg.voice = voices[1]; 
+          case "2":
+          msg.voice = voices[2]; 
+          break;
+          case "3":
+          msg.voice = voices[3]; 
+          break;
+          case "4":
+          msg.voice = voices[4]; 
+          break;
+          case "5":
+          msg.voice = voices[5]; 
+          break;
+          case "6":
+          msg.voice = voices[6]; 
+          break;
+          case "7":
+          msg.voice = voices[7]; 
+          break;
+          case "8":
+          msg.voice = voices[8]; 
+          break;
+          case "9":
+          msg.voice = voices[9]; 
+          break;
+        }*/
+        msg.voice=voices[vocieNum];
+        msg.volume = 1; // From 0 to 1
+        msg.rate = 1; // From 0.1 to 10
+        msg.pitch = 3;
+        msg.text = text
+        window.speechSynthesis.speak(msg)
+      }
+
+    
+
+      newsForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const news = fetch(
+          `https://newsapi.org/v2/everything?${
+            searchInput.value ? `q=${searchInput.value}&` : ""
+          }apiKey=0b329083fd2e48f3b08172a5b373a728`
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            newsContainer.innerText = ""
+            data.articles.map((article) => {
+              const articleElement = document.createElement("div")
+              articleElement.innerHTML = `
+                        <h2>${article.title}</h2>
+                        <button onclick='speak("${article.title}")'>say title</button>
+                        <p>${article.description}</p>
+                        <a href="${article.url}" target="_blank" >Read more</a>`
+              newsContainer.appendChild(articleElement)
+            })
+          })
+      })
+    </script>
+  </body>
+</html>
