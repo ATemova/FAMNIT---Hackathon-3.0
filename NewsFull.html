@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Document</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
+      
+      body {
+        background: rgb(12,29,116);
+        background: radial-gradient(circle, rgba(12,29,116,1) 0%, rgba(0,5,14,1) 100%);
+        height: 100vh;
+        margin: 0;
+        font-family: Ubuntu Sans, sans-serif;
+        
+      }
+      
+      .topnav {
+        overflow: hidden;
+        
+      }
+      
+      .topnav a {
+        float: left;;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        color: #aad6ec	;
+        
+      }
+      
+      .topnav a:hover {
+        text-shadow: #989ea1 4px 4px 5px;
+      }
+      
+      .topnav a:active {
+        color: #208dc4;
+        text-shadow: #57596b 5px 5px 5px;
+      }
+      .h1 {
+        text-align: center;
+        color: white;
+      }
+
+      input[type=text] {
+        margin-left: 19%;
+        margin-right: 5px ;
+        width: 50%;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 15px;
+        font-size: 16px;
+        background-color: white;
+        padding: 12px 20px 12px 15px;
+      }
+      .search{
+        appearance: button;
+        background-color: #1652F0;
+        border: 1px solid #1652F0;
+        border-radius: 15px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        font-family: Ubuntu Sans, sans-serif;
+        font-size: 16px;
+        line-height: 1.15;
+        overflow: visible;
+        padding: 13px 16px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: all 80ms ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: fit-content;
+      }
+
+      .search:disabled {
+        opacity: .5;
+      }
+
+      .search:focus {
+        outline: 0;
+      }
+
+      .search:hover {
+        background-color: #0A46E4;
+        border-color: #0A46E4;
+      }
+
+      .bsearch:active {
+        background-color: #0039D7;
+        border-color: #0039D7;
+      }
+      .news {
+        color: white;
+        padding-inline: 20px;
+        padding-top: 20px;
+
+      }
+      .read_more {
+        color: #aad6ec;
+        
+      }
+      .article {
+        margin: 30px;
+        padding: 30px;
+        border: 1px solid #aad6ec;
+        border-radius: 10px;
+      }
+      
+      .voice {
+        color: white;
+        margin-top: 35px;
+        padding-left: 21%;
+      }
+
+      .title{
+        margin-right: 10px;
+      }
+
+      #vocie, #speed{
+        margin-right: 20px;
+        padding: 10px 10px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 15px;
+        font-family: Ubuntu Sans, sans-serif;
+        font-size: 16px;
+        margin-bottom: 5%;
+      }
+
+      .say_title{
+        appearance: button;
+        background-color: #1652F0;
+        border: 1px solid #1652F0;
+        border-radius: 15px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        font-family: Ubuntu Sans, sans-serif;
+        font-size: 16px;
+        line-height: 1.15;
+        overflow: visible;
+        padding: 7px 14px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: all 80ms ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: fit-content;
+      }
+
+      .text_to_img{
+        appearance: button;
+        background-color: #1652F0;
+        border: 1px solid #1652F0;
+        border-radius: 15px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        font-family: Ubuntu Sans, sans-serif;
+        font-size: 16px;
+        line-height: 1.15;
+        overflow: visible;
+        padding: 7px 14px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: all 80ms ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: fit-content;
+      }
+      
+      </style>
+  </head>
+
+  <body>
+    <div class="topnav">
+      <a href="botce.html">Home</a>
+      <a href="#news">Login</a>
+      <a href="#contact">Contact</a>
+      <a href="#about">About</a>
+    </div>
+    <h1 class="h1">Search latest news</h1>
+
+    <form>
+      <input
+        type="text"
+        id="search"
+        placeholder="Topic..."
+      />
+      <button type="submit" class="search">Get News</button>
+    </form>
+
+    <div class="voice">
+      
+      <label class="title">Vocie: </label>
+      <input type="number" id="vocie"></input>
+
+      <label class="title">Speed: </label>
+      <input type="number" id="speed"></input>
+    </div>
+
+    <div class="news" id="news-container"></div>
+
+
+    <script>
+      const searchInput = document.getElementById("search")
+      const newsForm = document.querySelector("form")
+      const newsContainer = document.getElementById("news-container")
+
+      if ('speechSynthesis' in window) {
+      // Speech Synthesis supported 🎉
+      }else{
+      // Speech Synthesis Not Supported 😣
+      alert("Sorry, your browser doesn't support text to speech!");
+      }    
+   
+      speechSynthesis.getVoices().forEach(function(voice) {
+        console.log(voice.name, voice.default ? voice.default :'');
+      });
+
+      const speak = (text) => {
+              const msg = new SpeechSynthesisUtterance()
+              var voices = window.speechSynthesis.getVoices();
+              let vocieNum = document.getElementById("vocie").valueAsNumber;
+              let speedNum = document.getElementById("speed").valueAsNumber;
+              
+              msg.voice=voices[vocieNum];
+              msg.volume = 1; // From 0 to 1
+              if (speedNum > 0){
+                msg.rate = speedNum; // From 0.1 to 10
+              }
+              else {
+                msg.rate = 1;
+              }
+              msg.pitch = 3;
+              msg.text = text
+              window.speechSynthesis.speak(msg)
+            }
+
+
+
+            newsForm.addEventListener("submit", (e) => {
+              e.preventDefault()
+              const news = fetch(
+                  `https://newsapi.org/v2/everything?${
+                  searchInput.value ? `q=${searchInput.value}&` : ""
+                }apiKey=0b329083fd2e48f3b08172a5b373a728`
+              )
+                .then((res) => res.json())
+                .then((data) => {
+                  newsContainer.innerText = ""
+                  data.articles.map((article) => {
+                    const articleElement = document.createElement("div")
+                    articleElement.innerHTML = `
+                              <div class="article"><h2>${article.title}</h2>
+                              <button class="say_title"onclick='speak("${article.title}")'>say title</button>
+                              <button class="text_to_img" onclick='getImage("${article.title}")'>generate image</button>
+                              <p>${article.description}</p>
+                              <a href="${article.url}" class="read_more"target="_blank" >Read more</a></div>
+                          `
+                    newsContainer.appendChild(articleElement)
+
+                  })
+                })
+            })
+
+       const API_KEY = "sk-proj-OoSU2Acer4cePX8YISOhT3BlbkFJd6cW0RaT06L4JQPg67vJ"
+       
+       
+       
+       const generate = document.querySelector(".text_to_img")
+      const inputElement = document.querySelector(".article")
+      
+      const getImage = async () =>{
+        
+        const options = {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${API_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "prompt": inputElement,
+          "n": 4,
+          "size": "1024x1024"
+        })
+      }
+
+        try{
+          const response  = await fetch('https://api.openai.com/v1/images/generations', options)
+          const data = await response.json()
+          console.log(data)
+        }catch(error){
+          console.log(error)
+        }
+      }
+
+    
+    </script>
+  </body>
+</html>
