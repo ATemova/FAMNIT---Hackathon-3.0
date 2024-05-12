@@ -4,36 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&display=swap');
     body {
-      background-color: rgb(34, 142, 220);
+      background: rgb(12,29,116);
+        background: radial-gradient(circle, rgba(12,29,116,1) 0%, rgba(0,5,14,1) 100%);
+        height: 100vh;
+        margin: 0;
+        font-family: Ubuntu Sans, sans-serif;
     }
 
     form {
-      width: 80%;
-      max-width: 500px; 
-      margin: auto;
-      padding: 20px;
+      margin: 20%;
+        width: 50%;
+        box-sizing: border-box;
+        font-size: 16px;
+        padding: 12px 20px 12px 15px;
     }
 
     label {
       display: block;
       margin-bottom: 5px; 
+      padding-top: 7px;
+      
+      color: white;
     }
 
     input, select {
       width: 100%; 
       box-sizing: border-box;
-      padding: 8px;
-      margin-bottom: 10px; 
+      border: 2px solid #ccc;
+      border-radius: 15px;
+      padding: 12px;
+      margin-bottom: 30px; 
     }
 
     button {
-      width: 50%;
-      height: 40px;
-      background-color: gray;
-      color: white;
-      border: none; 
-      cursor: pointer;
+      appearance: button;
+        background-color: #1652F0;
+        border: 1px solid #1652F0;
+        border-radius: 15px;
+        box-sizing: border-box;
+        color: #FFFFFF;
+        cursor: pointer;
+        font-family: Ubuntu Sans, sans-serif;
+        font-size: 16px;
+        line-height: 1.15;
+        overflow: visible;
+        padding: 13px 16px;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        transition: all 80ms ease-in-out;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: fit-content;
     }
 
     /* Center the button */
@@ -87,7 +112,7 @@
 
         alert("Please fill all the fields.");
       } else {
-        window.location.href = "../testt.html";
+        window.location.href = "../robot.html";
       }
     }
 
