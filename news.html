@@ -21,10 +21,12 @@
       <button type="submit">Get News</button>
     </form>
 
+    
     <label>Vocie: </label>
-    <input type="text" id="vocie"></input>
-
-
+    <input type="number" id="vocie"></input>
+    
+    <label>Speed: </label>
+    <input type="number" id="speed"></input>
 
     <div id="news-container"></div>
 
@@ -49,47 +51,26 @@ speechSynthesis.getVoices().forEach(function(voice) {
 const speak = (text) => {
         const msg = new SpeechSynthesisUtterance()
         var voices = window.speechSynthesis.getVoices();
-        let vocieNum = document.getElementById("vocie");
-        /*switch(voiceNum.value){
-          case "":
-          msg.voice = voices[0]; 
-          break;
-          case "1":
-          msg.voice = voices[1]; 
-          case "2":
-          msg.voice = voices[2]; 
-          break;
-          case "3":
-          msg.voice = voices[3]; 
-          break;
-          case "4":
-          msg.voice = voices[4]; 
-          break;
-          case "5":
-          msg.voice = voices[5]; 
-          break;
-          case "6":
-          msg.voice = voices[6]; 
-          break;
-          case "7":
-          msg.voice = voices[7]; 
-          break;
-          case "8":
-          msg.voice = voices[8]; 
-          break;
-          case "9":
-          msg.voice = voices[9]; 
-          break;
-        }*/
+        let vocieNum = document.getElementById("vocie").valueAsNumber;
+        let speedNum = document.getElementById("speed").valueAsNumber;
+        
         msg.voice=voices[vocieNum];
         msg.volume = 1; // From 0 to 1
-        msg.rate = 1; // From 0.1 to 10
+        if (speedNum > 0){
+          msg.rate = speedNum; // From 0.1 to 10
+        }
+        else {
+          msg.rate = 1;
+        }
         msg.pitch = 3;
         msg.text = text
         window.speechSynthesis.speak(msg)
       }
 
-    
+     
+
+      
+
 
       newsForm.addEventListener("submit", (e) => {
         e.preventDefault()
